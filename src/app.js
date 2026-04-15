@@ -9,7 +9,10 @@ const app = express();
 
 // Middlewares
 app.use(cors({
-    origin: 'http://localhost:4200'
+    origin: ['http://localhost:4200',
+        'https://hugodelgadolucio.github.io/Frontend_To_Do_List/#/'
+    ],
+     credentials: true
 }));
 app.use(express.json());
 
