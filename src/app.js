@@ -7,13 +7,27 @@ import routesUser from './routes/auth.routes.js'
 //Inicializar express
 const app = express();
 
-// Middlewares
+
+
+
 app.use(cors({
-    origin: ['http://localhost:4200',
-        'https://hugodelgadolucio.github.io/Frontend_To_Do_List/#/'
-    ],
-     credentials: true
+  origin: function(origin, callback) {
+    const allowed = [
+      'http://localhost:4200',
+      'https://hugodelgadolucio.github.io'
+    ];
+
+    if (!origin) return callback(null, true); // Postman, etc.
+
+    if (allowed.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido por CORS'));
+    }
+  },
+  credentials: true
 }));
+
 app.use(express.json());
 
 
